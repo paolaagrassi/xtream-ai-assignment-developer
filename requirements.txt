@@ -1,0 +1,8 @@
+fastapi
+pandas
+postgres
+pytest
+pytest-mock
+SQLAlchemy
+alembic
+setuptools
