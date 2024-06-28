@@ -68,7 +68,7 @@ def predict_diamond_price(data: DiamondFeaturesForPredictionSchema) -> str:
             data
     )
         model: XGBRegressor = model_service.load_pickle_model(
-            path="/home/paolaagrassi/xtream-code/xtream-ai-assignment-developer/data/models/model_xcgboost.pkl"
+            path="data/models/model_xcgboost.pkl"
         )
 
         new_diamond_df = diamond_df.copy()
