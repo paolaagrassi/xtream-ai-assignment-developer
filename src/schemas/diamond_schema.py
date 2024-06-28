@@ -1,13 +1,13 @@
 from typing import Optional
 from pydantic import BaseModel
-
+from src.utils.enums.diamonds_enums import DiamondClarityEnum, DiamondColorEnum, DiamondCutEnum
 
 
 class BaseDiamondSchema(BaseModel):
     carat: float
-    cut: str
-    color: str
-    clarity: str
+    cut: DiamondCutEnum
+    color: DiamondColorEnum
+    clarity: DiamondClarityEnum
     
 
 class DiamondFeaturesForPredictionSchema(BaseDiamondSchema):
