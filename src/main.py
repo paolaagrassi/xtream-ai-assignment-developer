@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
+from src.routers.diamond_router import router as diamond_router
 
 app = FastAPI()
 
@@ -17,5 +17,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(diamond_router)
 
 
