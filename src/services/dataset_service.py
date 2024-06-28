@@ -13,3 +13,9 @@ def convert_column_into_ordinal_categorical_data_type(
         logger.error(f"Error converting column '{column_name}' to categorical. [Details]: {e}")
         raise e
 
+def create_dataframe_from_csv(path: str) -> pd.DataFrame:
+    try:
+        return pd.read_csv(path)
+    except FileNotFoundError as e:
+        logger.error(f"Error converting csv from path {path} to dataframe. [Details]: {e}")
+        raise e

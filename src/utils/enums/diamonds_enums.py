@@ -25,3 +25,15 @@ class DiamondCutEnum(str, Enum):
     very_good = "Very Good"
     ideal = "Ideal"
     premium = "Premium"
+
+class DiamondColumnsEnum(str, Enum):
+    CARAT = 'carat'
+    COLOR = 'color'
+    CLARITY = 'clarity'
+    CUT = 'cut'
+    PRICE = 'price'
+    DEPTH = 'depth'
+    TABLE = 'table'
+    X = 'x'
+    Y = 'y'
+    Z = 'z'
