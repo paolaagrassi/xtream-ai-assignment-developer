@@ -1,8 +1,13 @@
+alembic
 fastapi
+matplotlib
+optuna
 pandas
+plotly
 postgres
 pytest
 pytest-mock
-SQLAlchemy
-alembic
 setuptools
+scikit-learn
+SQLAlchemy
+xgboost
