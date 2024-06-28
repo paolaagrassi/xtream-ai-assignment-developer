@@ -1,4 +1,4 @@
-FROM --platform=amd64 python:3.12.1-alpine3.19
+FROM --platform=amd64 python:3.12.1
 
 ENV PYTHONUNBUFFERED 1
 
