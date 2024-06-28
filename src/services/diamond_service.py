@@ -55,9 +55,15 @@ def prepare_diamond_df(df: pd.DataFrame) -> pd.DataFrame:
         logger.error(f"Error while preparing dataframe. [Details]: {e}")
         raise e
 
+def validate_data_to_predict_diamond(data: DiamondFeaturesForPredictionSchema) -> None:
+    for value in data:
+        if 0 in value:
+            raise ValueError(f'{value[0]} must have value grather than 0.')
+
 
 def predict_diamond_price(data: DiamondFeaturesForPredictionSchema) -> str:
     try:
+        validate_data_to_predict_diamond(data)
         diamond_df: pd.DataFrame = create_dataframe_from_diamond_schema(
             data
     )
