@@ -13,9 +13,9 @@ services:
       - .env
     
     ports:
-      - "8080:8080"
+      - "8000:8000"
 
-    command: sh -c "fastapi run src/main.py --reload --port=8080"
+    command: sh -c "fastapi run src/main.py --reload --port=8000"
     networks:
       - api-network
 
