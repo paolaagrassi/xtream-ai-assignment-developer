@@ -1,8 +1,6 @@
 version: '3.9'
 
-networks:
-  api-network:
-    driver: bridge
+
     
 services:
   fastapi-service:
@@ -47,3 +45,7 @@ services:
       - /var/lib/pgadmin/data 
     networks:
       - api-network
+
+networks:
+  api-network:
+    driver: bridge
