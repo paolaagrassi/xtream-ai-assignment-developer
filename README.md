@@ -68,4 +68,58 @@ Observability is key. Save every request and response made to the APIs to a **pr
 ---
 
 ## How to run
-Please fill this section as part of the assignment.
+
+## Setup requirements
+[Python 3.10 +](https://www.python.org/downloads/)
+
+[pip](https://pip.pypa.io/en/stable/installation/)
+
+[Docker Compose](https://docs.docker.com/compose/install/)
+
+### Env variables
+Run the commands below in the project root
+```
+export POSTGRES_USER=xtreamuser
+export POSTGRES_PASSWORD=xtreamuserpassword
+export POSTGRES_DB=postgres_xtream_db
+export PGADMIN_DEFAULT_EMAIL=postgresxtream@admin.com
+export PGADMIN_DEFAULT_PASSWORD=postgresXtreamAdmin
+```
+To create the .env file run the following command
+```
+python3 setup.py create_env_file
+```
+
+### Running Jupyter Notebook
+The notebook is located in `notebooks/MP01_Diamonds_Modelling.ipynb`.
+To run the notebook, it's necessary to install the dependencies. Run in the project root:
+```
+python3 -m pip install -r requirements.txt
+```
+
+After installing the dependencies, please run all the cells in the notebook. 
+
+Once all the cells have been run, our model will be exported to the data/models folder, named `model_xcgboost.pkl`. Please verify the presence of the folder 'data/models' and the model. 
+
+
+### Running API
+Run in the project root
+```
+docker-compose -f ./docker-compose.yml up --build
+```
+The command above will initialize our API in the address [http://localhost:8000](http://localhost:8000) and the swagger in [http://localhost:8000/docs](http://localhost:8000/docs). 
+
+Before using the endpoints, it's necessary to initialize our database tables. To do this, while running the Docker Compose, open another tab in the terminal and run the following command in the project root:
+```
+alembic upgrade head
+```
+
+#### pgAdmin
+pgAdmin will be available at the address [http://localhost:16543/](http://localhost:16543/)
+
+Use the pdAdmin credentials exported as the env variables PGADMIN_DEFAULT_EMAIL and PGADMIN_DEFAULT_PASSWORD.
+
+#### Database
+The database is PostgreSQL. The port is `5432` and the host is localhost. 
+
+To create a connection with the DB, use the credentials exported as the env variables POSTGRES_USER, POSTGRES_PASSWORD, and POSTGRES_DB. 
