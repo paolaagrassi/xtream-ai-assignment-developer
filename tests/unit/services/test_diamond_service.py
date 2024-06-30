@@ -2,16 +2,20 @@ import pytest
 import pandas as pd
 from pandas.testing import assert_frame_equal
 
-from src.schemas.diamond_schema import DiamondFeaturesForSearchSchema
+from src.schemas.diamond_schema import (
+    DiamondFeaturesForPredictionSchema,
+    DiamondFeaturesForSearchSchema,
+)
 from src.services.diamond_service import (
-    filter_diamonds_by_features,
+    create_dataframe_from_diamond_schema_for_prediction,
+    filter_diamonds_df_by_features,
     diamonds_df_filtered_by_similar_weight,
 )
 from src.utils.enums.diamonds_enums import (
     DiamondClarityEnum,
     DiamondColorEnum,
     DiamondCutEnum,
-    DiamondColumnsEnum
+    DiamondColumnsEnum,
 )
 
 
@@ -107,7 +111,7 @@ class TestDiamondService:
             df_result_after_filter,
         ):
 
-            response = filter_diamonds_by_features(
+            response = filter_diamonds_df_by_features(
                 features=features, df=df_with_features_and_price
             )
 
@@ -128,4 +132,19 @@ class TestDiamondService:
             assert isinstance(response, pd.DataFrame)
             assert_frame_equal(response, df_result_after_filter)
 
-        
+    class TestCreateDataframeFromDiamondSchemaForPrediction:
+        def test_create_dataframe_from_diamond_schema_for_prediction(self):
+            data = DiamondFeaturesForPredictionSchema(
+                carat=1,
+                cut=DiamondCutEnum.fair.value,
+                color=DiamondColorEnum.d.value,
+                clarity=DiamondClarityEnum.i1.value,
+                depth=2.5,
+                table=1.5,
+                x=1.5,
+                y=1.5,
+                z=1.5,
+            )
+
+            response = create_dataframe_from_diamond_schema_for_prediction(data)
+            assert isinstance(response, pd.DataFrame)
