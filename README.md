@@ -79,11 +79,11 @@ Observability is key. Save every request and response made to the APIs to a **pr
 ### Env variables
 Run the commands below in the project root
 ```
-export POSTGRES_USER=xtreamuser
-export POSTGRES_PASSWORD=xtreamuserpassword
-export POSTGRES_DB=postgres_xtream_db
-export PGADMIN_DEFAULT_EMAIL=postgresxtream@admin.com
-export PGADMIN_DEFAULT_PASSWORD=postgresXtreamAdmin
+export POSTGRES_USER=xtreamassignment
+export POSTGRES_PASSWORD=xtreamassignmentpassword
+export POSTGRES_DB=postgres_db
+export PGADMIN_DEFAULT_EMAIL=postgres@admin.com
+export PGADMIN_DEFAULT_PASSWORD=postgresAdmin
 ```
 To create the .env file run the following command
 ```
@@ -92,12 +92,15 @@ python3 setup.py create_env_file
 
 ### Running Jupyter Notebook
 The notebook is located in `notebooks/MP01_Diamonds_Modelling.ipynb`.
+
+If it's your first time running a jupyter notebook with VSCode, make sure you have all the necessary extensions installed in your machine. After install them, reload your VSCode before run the cells.
+
 To run the notebook, it's necessary to install the dependencies. Run in the project root:
 ```
 python3 -m pip install -r requirements.txt
 ```
 
-After installing the dependencies, please run all the cells in the notebook. 
+After installing the dependencies, please run all the cells in the notebook by clicking on `Run All`. 
 
 Once all the cells have been run, our model will be exported to the data/models folder, named `model_xcgboost.pkl`. Please verify the presence of the folder 'data/models' and the model. 
 
@@ -106,6 +109,10 @@ Once all the cells have been run, our model will be exported to the data/models 
 Run in the project root
 ```
 docker-compose -f ./docker-compose.yml up --build
+```
+or
+```
+docker-compose up --build
 ```
 The command above will initialize our API in the address [http://localhost:8000](http://localhost:8000) and the swagger in [http://localhost:8000/docs](http://localhost:8000/docs). 
 
@@ -123,3 +130,11 @@ Use the pdAdmin credentials exported as the env variables PGADMIN_DEFAULT_EMAIL 
 The database is PostgreSQL. The port is `5432` and the host is localhost. 
 
 To create a connection with the DB, use the credentials exported as the env variables POSTGRES_USER, POSTGRES_PASSWORD, and POSTGRES_DB. 
+
+### Tests
+For running integration test it may be necessary sqlite3 module installed on your machine. Also, verify your python interpreter. I used Python 3.10.12 to run them. 
+
+You can run all the tests by VSCode or running 
+```
+pytest
+```
