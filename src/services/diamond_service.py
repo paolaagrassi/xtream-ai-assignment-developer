@@ -61,7 +61,7 @@ def prepare_diamond_df_for_xgboost_model(df: pd.DataFrame) -> pd.DataFrame:
     ----------
     df: (DataFrame)
         The diamonds dataframe to be prepared.
-    
+
     Returns
     -------
     df: (DataFrame)
@@ -69,7 +69,7 @@ def prepare_diamond_df_for_xgboost_model(df: pd.DataFrame) -> pd.DataFrame:
 
     Raises
     ------
-    (ValueError, TypeError, KeyError): 
+    (ValueError, TypeError, KeyError):
         Raises if there are errors during the preprocessing process.
     """
     try:
@@ -166,12 +166,21 @@ def filter_diamonds_df_by_features(
     -------
     DataFrame:
         Returns the diamonds dataframe with the filtered values.
+
+    Raises
+    ------
+    ValueError:
+        Raises if the filter found no diamonds.
     """
-    return df[
+    new_df = df[
         (df[DiamondColumnsEnum.CLARITY.value] == features.clarity)
         & (df[DiamondColumnsEnum.COLOR.value] == features.color)
         & (df[DiamondColumnsEnum.CUT.value] == features.cut)
     ]
+    if new_df.empty:
+        raise ValueError("It was not found diamonds for the chosen features.")
+    
+    return new_df
 
 
 def diamonds_df_filtered_by_similar_weight(
@@ -222,7 +231,7 @@ def search_diamond_by_features_and_similar_weight(
     Raises
     ------
     ValueError:
-        Raises when the received carat's value is zero.
+        Raises when the received carat's value is zero or there is no result for the applied filter.
 
     """
     try:
