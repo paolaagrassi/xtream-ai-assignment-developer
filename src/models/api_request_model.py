@@ -1,4 +1,5 @@
 from sqlalchemy import Column, DateTime, Integer, String
+from sqlalchemy.orm import Session
 from src.config.database_config import Base
 
 class APIrequestModel(Base):
@@ -11,3 +12,7 @@ class APIrequestModel(Base):
     response = Column(String, nullable=False)
     status_code = Column(Integer, nullable=False)
     
+    def save(self, db: Session):
+        db.add(self)
+        db.commit()
+        db.refresh(self)
