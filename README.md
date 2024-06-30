@@ -66,9 +66,14 @@ Your API should support two use cases:
 Observability is key. Save every request and response made to the APIs to a **proper database**.
 
 ---
+## API
+My solution to challenges 3 and 4 was built using FASTApi, SQLAlchemy, PostgreSQL, Docker and Alembic.
 
-## How to run
+The folder structure was created following the Separation of Concerns principles, as in the example below.
 
+![image](https://github.com/paolaagrassi/xtream-ai-assignment-developer/assets/101572382/8c85cb13-0e0e-4989-a621-c1e3d70f369a)
+
+# How to run
 ## Setup requirements
 [Python 3.10 +](https://www.python.org/downloads/)
 
@@ -76,7 +81,7 @@ Observability is key. Save every request and response made to the APIs to a **pr
 
 [Docker Compose](https://docs.docker.com/compose/install/)
 
-### Env variables
+### 1. Env variables
 Run the commands below in the project root
 ```
 export POSTGRES_USER=xtreamassignment
@@ -90,7 +95,7 @@ To create the .env file run the following command
 python3 setup.py create_env_file
 ```
 
-### Running Jupyter Notebook
+### 2. Running Jupyter Notebook
 The notebook is located in `notebooks/MP01_Diamonds_Modelling.ipynb`.
 
 If it's your first time running a jupyter notebook with VSCode, make sure you have all the necessary extensions installed in your machine. After install them, reload your VSCode before run the cells.
@@ -105,7 +110,7 @@ After installing the dependencies, please run all the cells in the notebook by c
 Once all the cells have been run, our model will be exported to the data/models folder, named `model_xcgboost.pkl`. Please verify the presence of the folder 'data/models' and the model. 
 
 
-### Running API
+### 3. Running API
 Run in the project root
 ```
 docker-compose -f ./docker-compose.yml up --build
@@ -116,7 +121,9 @@ docker-compose up --build
 ```
 The command above will initialize our API in the address [http://localhost:8000](http://localhost:8000) and the swagger in [http://localhost:8000/docs](http://localhost:8000/docs). 
 
-Before using the endpoints, it's necessary to initialize our database tables. To do this, while running the Docker Compose, open another tab in the terminal and run the following command in the project root:
+⚠️ Before using the endpoints, it's necessary to initialize our database tables. To do this, while running the Docker Compose, run the following command in the project root:
+
+(If you open another terminal to run Alembic, it may be necessary to export the env variables again.)
 ```
 alembic upgrade head
 ```
@@ -132,7 +139,7 @@ The database is PostgreSQL. The port is `5432` and the host is localhost.
 To create a connection with the DB, use the credentials exported as the env variables POSTGRES_USER, POSTGRES_PASSWORD, and POSTGRES_DB. 
 
 ### Tests
-For running integration test it may be necessary sqlite3 module installed on your machine. Also, verify your python interpreter. I used Python 3.10.12 to run them. 
+For running integration tests it may be necessary sqlite3 module installed on your machine. Also, verify your python interpreter. I used Python 3.10.12 to run them. 
 
 You can run all the tests by VSCode or running 
 ```
